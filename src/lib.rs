@@ -2,6 +2,7 @@ use wasm_bindgen::prelude::wasm_bindgen;
 use web_sys::console::log_1 as log;
 use base64::decode as b64_decode;
 use image::load_from_memory;
+use image::ImageOutputFormat::Png;
 
 #[cfg(test)]
 mod tests {
@@ -24,4 +25,10 @@ pub fn grayscale(encoded_file: &str) {
 
     image = image.grayscale();
     log(&"Image grayscale effect applied".into());
+
+    // use buffer to store the image while the image is being converted back to binary data
+    let mut buffer = Vec::new();
+    // '&mut buffer' allows function to borrow this variable
+    image.write_to(&mut buffer, Png).unwrap();
+    log(&"New image converted to binary/written to buffer".into());
 }
