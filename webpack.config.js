@@ -15,5 +15,9 @@ module.exports = {
       new WasmPackPlugin({
          crateDirectory: path.resolve(__dirname, '.'), // searches for cargo.toml file
       })
-   ]
+   ],
+   experiments: {
+      asyncWebAssembly: true,
+      topLevelAwait: true
+   }
 }
